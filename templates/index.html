@@ -2,203 +2,101 @@
 <html lang="en">
 
 <head>
+    <meta name="theme-color" content="#0a192f">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Diabetes Predictor</title>
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
 
 <body>
 
-    <div style="color:blue">
-        <form action="{{ url_for('predict')}}" method="post">
-            <h2>Predictive analysis</h2>
-            <h3>fixed acidity</h3>
-            <input id="first" name="fixed acidity" type="number " required ="required">
-            <h3>volatile acidity</h3><br><input id="second" name="volatile acidity" required="required">
-            <h3>citric acid</h3><input id="third" name="citric acid" required="required">
-            <h3>residual sugar</h3><input id="fourth" name="residual sugar" required="required">
-            <h3>chlorides</h3><br><input id="fifth" name="chlorides" required="required">
-            <h3>free sulfur dioxide</h3><br><input id="sixth" name="free sulfur dioxide" required="required">
-            <h3>total sulfur dioxide</h3><br><input id="seventh" name="total sulfur dioxide" required="required">
-            <h3>density</h3><br><input id="eigth" name="density" required="required">
-            <h3>pH</h3><br><input id="nineth" name="pH" required="required">
-            <h3>sulphates</h3><br><input id="tenth" name="sulphates" required="required">
-            <h3>alcohol</h3><br><input id="eleventh" name="alcohol" required="required">
-            
-            <br><br><button id="sub" type="submit ">Predict Quality of Vine</button>
-            <br>
-
-
-
-
-        </form>
-
-
-
-        <br><br><h3>{{ prediction_text }}<h3>
+    <!-- Start Intro -->
+    <div id="intro-div">
+        <svg id="logo" width="269" height="72" viewBox="0 0 269 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M47.7 57.7H19.9L15.3 71H0.600006L25.7 1.09999H42L67.1 71H52.3L47.7 57.7ZM43.9 46.5L33.8 17.3L23.7 46.5H43.9Z"
+                stroke="#64FFDA" stroke-width="1" />
+            <path d="M136.182 71H122.182L90.482 23.1V71H76.482V1.09999H90.482L122.182 49.1V1.09999H136.182V71Z"
+                stroke="#64FFDA" stroke-width="1" />
+            <path
+                d="M174.117 71.7C169.251 71.7 164.851 70.8667 160.917 69.2C157.051 67.5333 153.984 65.1333 151.717 62C149.451 58.8667 148.284 55.1667 148.217 50.9H163.217C163.417 53.7667 164.417 56.0333 166.217 57.7C168.084 59.3667 170.617 60.2 173.817 60.2C177.084 60.2 179.651 59.4333 181.517 57.9C183.384 56.3 184.317 54.2333 184.317 51.7C184.317 49.6333 183.684 47.9333 182.417 46.6C181.151 45.2667 179.551 44.2333 177.617 43.5C175.751 42.7 173.151 41.8333 169.817 40.9C165.284 39.5667 161.584 38.2667 158.717 37C155.917 35.6667 153.484 33.7 151.417 31.1C149.417 28.4333 148.417 24.9 148.417 20.5C148.417 16.3667 149.451 12.7667 151.517 9.69999C153.584 6.63333 156.484 4.29999 160.217 2.69999C163.951 1.03333 168.217 0.199997 173.017 0.199997C180.217 0.199997 186.051 1.96666 190.517 5.49999C195.051 8.96666 197.551 13.8333 198.017 20.1H182.617C182.484 17.7 181.451 15.7333 179.517 14.2C177.651 12.6 175.151 11.8 172.017 11.8C169.284 11.8 167.084 12.5 165.417 13.9C163.817 15.3 163.017 17.3333 163.017 20C163.017 21.8667 163.617 23.4333 164.817 24.7C166.084 25.9 167.617 26.9 169.417 27.7C171.284 28.4333 173.884 29.3 177.217 30.3C181.751 31.6333 185.451 32.9667 188.317 34.3C191.184 35.6333 193.651 37.6333 195.717 40.3C197.784 42.9667 198.817 46.4667 198.817 50.8C198.817 54.5333 197.851 58 195.917 61.2C193.984 64.4 191.151 66.9667 187.417 68.9C183.684 70.7667 179.251 71.7 174.117 71.7Z"
+                stroke="#64FFDA" stroke-width="1" />
+            <path d="M268.855 1.19999V71H254.855V41.3H224.955V71H210.955V1.19999H224.955V29.9H254.855V1.19999H268.855Z"
+                stroke="#64FFDA" stroke-width="1" />
+        </svg>
+        <!-- <p style="font-size: 1.5rem; margin-top: 30px; margin-bottom: 10px">x</p>
+        <p style="font-weight: 600;">AIHAB</p> -->
     </div>
+    <!-- End intro -->
 
-
-
-
-    <style>
-        body {
-            background-color: lightslategray;
-            text-align: center;
-            padding: 0px;
-        }
-        
-        #research {
-            font-size: 18px;
-            width: 100px;
-            height: 23px;
-            top: 23px;
-        }
-        
-        #box {
-            border-radius: 60px;
-            border-color: 45px;
-            border-style: solid;
-            font-family: cursive;
-            text-align: center;
-            background-color: rgb(168, 131, 61);
-            font-size: medium;
-            position: absolute;
-            width: 700px;
-            bottom: 9%;
-            height: 850px;
-            right: 30%;
-            padding: 0px;
-            margin: 0px;
-            font-size: 14px;
-        }
-        
-        #fuel {
-            width: 83px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 20px;
-        }
-        
-        #fuel:hover {
-            background-color: coral;
-        }
-        
-        #research {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #research:hover {
-            background-color: coral;
-        }
-        
-        #resea {
-            width: 99px;
-            height: 43px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #resea:hover {
-            background-color: coral;
-        }
-        
-        #sub {
-            width: 120px;
-            height: 80px;
-            text-align: center;
-            border-radius: 14px;
-            font-size: 18px;
-        }
-        
-        #sub:hover {
-            background-color: darkcyan;
-        }
-        
-        #first {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #second {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #third {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #fourth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-        #fifth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #sixth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #seventh {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #eigth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #nineth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #tenth {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        #eleventh {
-            border-radius: 14px;
-            height: 25px;
-            font-size: 20px;
-            text-align: center;
-        }
-        
-    </style>
+    <div class="outer-form-div">
+        <form action="{{ url_for('predict')}}" method="post">
+            <h1>Predictive Analysis for Wine Quality.</h1>
+            <div class="outer-div">
+                <div class="outer-div-nobutton">
+                    <div class="inner-div">
+                        <p>1. fixed acidity</p>
+                        <input id="first" name="fixed acidity" type="number " required ="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>2. volatile acidity</p>
+                        <input id="second" name="volatile acidity" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>3. citric acid</p>
+                        <input id="third" name="citric acid" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>4. residual sugar</p>
+                        <input id="fourth" name="residual sugar" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>5. chlorides</p>
+                        <input id="fifth" name="chlorides" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>6. free sulfur dioxide</p>
+                        <input id="sixth" name="free sulfur dioxide" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>7. total sulfur dioxide</p>
+                        <input id="seventh" name="total sulfur dioxide" required="required">
+                    </div>
+                    <div class="inner-div">
+                        <p>8. density</p>
+                        <input id="eigth" name="density" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>9. pH</p>
+                        <input id="nineth" name="pH" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>10. sulphates</p>
+                        <input id="tenth" name="sulphates" required="required" autocomplete="off">
+                    </div>
+                    <div class="inner-div">
+                        <p>11. alcohol</p>
+                        <input id="eleventh" name="alcohol" required="required" autocomplete="off">
+                    </div>
+                </div>
+                <div class="outer-div-button">
+                    <button id="sub" type="submit">Check Results</button>
+                </div>
+            </div>
+        </form>
+        <p class="prediction">{{ prediction_text }}<p>
+    </div>
+    <footer>
+        <div>
+            <p>Created by</p>
+            <a href="https://github.com/anshgoyal1">Ansh</a>
+        </div>
+        <div>
+            <p>Designed by</p> 
+            <a href="https://github.com/aihab1">Aihab</a>
+        </div>
+    </footer>
 </body>
 
 </html>
