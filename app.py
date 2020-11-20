@@ -31,7 +31,7 @@ def predict():
        sulphates = float(request.form['sulphates'])
        alcohol = float(request.form['alcohol'])
 
-       x = [[fixed_acidity,volatile_acidity,citric_acid,residual_sugar,chlorides,free_sulfur_dioxide,total_sulfur_dioxide,density,pH,sulphates,alcohol]]
+       x = [[volatile_acidity,citric_acid,chlorides,sulphates,alcohol]]
        
        quality = model.predict(x)
        
